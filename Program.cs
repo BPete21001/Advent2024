@@ -19,6 +19,11 @@ Console.WriteLine("Day 3 part 1 solution: " + Day3Part1.Solve(day3Input));
 
 Console.WriteLine("Day 3 part 2 solution: " + Day3Part2.Solve(day3Input));
 
+string day4Input = File.ReadAllText($"{Path.GetDirectoryName(GetThisFilePath())}\\Inputs\\Day4Input.txt");
+
+Console.WriteLine("Day 4 part 1 solution: " + Day4Part1.Solve(day4Input));
+
+
 static string GetThisFilePath([CallerFilePath] string path = null)
 {
     return path;
