@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Advent2024.Solutions;
 
-public class Day6Part1
+public class Day6Part2
 {
     public static int Solve(string input)
     {
@@ -32,20 +32,66 @@ public class Day6Part1
                 }
             }
 
-            if(guard.Direction == 'N')
+            if (guard.Direction == 'N')
             {
                 break;
             }
 
         }
-        
-        while(IsOnMap(guard.yPos, guard.xPos, map))
+
+        int numInfiniteLoops = 0;
+
+        for (int i = 0; i < map.Length; i++)
         {
+            for (int j = 0; j < map[i].Length; j++)
+            {
+                if (map[i][j] == '^' || map[i][j] == '#')
+                {
+                    continue;
+                }
+
+                Guard tempGuard = new Guard()
+                {
+                    yPos = guard.yPos,
+                    xPos = guard.xPos,
+                    Direction = guard.Direction
+                };
+
+                map[i][j] = '#';
+
+                if(IsInfiniteLoop(tempGuard, map))
+                {
+                    numInfiniteLoops++;
+                }
+
+                map[i][j] = '.';
+
+            }
+        }
+
+        return numInfiniteLoops;
+
+    }
+
+    private static bool IsInfiniteLoop(Guard guard, char[][] map)
+    {
+        HashSet<string> seenPositions = new HashSet<string>();
+
+        while (IsOnMap(guard.yPos, guard.xPos, map))
+        {
+            string currPosition = $"{guard.yPos}-{guard.xPos}-{guard.Direction}";
+
+            if (seenPositions.Contains(currPosition))
+            {
+                return true;
+            }
+
+            seenPositions.Add(currPosition);
+
             Tuple<int, int> facingSquare = guard.GetFacingSquare();
 
-            if(!IsOnMap(facingSquare.Item1, facingSquare.Item2, map))
+            if (!IsOnMap(facingSquare.Item1, facingSquare.Item2, map))
             {
-                map[guard.yPos][guard.xPos] = 'X';
                 guard.Step();
                 continue;
             }
@@ -56,24 +102,10 @@ public class Day6Part1
                 continue;
             }
 
-            map[guard.yPos][guard.xPos] = 'X';
             guard.Step();
         }
 
-        int squaresSteppedOn = 0;
-
-        foreach (char[] line in map)
-        {
-            foreach(char square in line)
-            {
-                if(square == 'X')
-                {
-                    squaresSteppedOn++;
-                }
-            }
-        }
-
-        return squaresSteppedOn;
+        return false;
     }
 
     private static bool IsOnMap(int yPos, int xPos, char[][] map)
@@ -113,7 +145,7 @@ public class Day6Part1
 
         public void Step()
         {
-            if(this.Direction == 'N')
+            if (this.Direction == 'N')
             {
                 yPos--;
             }

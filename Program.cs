@@ -35,6 +35,7 @@ string day6Input = File.ReadAllText($"{Path.GetDirectoryName(GetThisFilePath())}
 
 Console.WriteLine("Day 6 part 1 solution: " + Day6Part1.Solve(day6Input));
 
+Console.WriteLine("Day 6 part 2 solution: " + Day6Part2.Solve(day6Input));
 
 static string GetThisFilePath([CallerFilePath] string path = null)
 {
