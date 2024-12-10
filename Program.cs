@@ -51,7 +51,9 @@ Console.WriteLine("Day 8 part 2 solution: " + Day8Part2.Solve(day8Input));
 
 string day9Input = File.ReadAllText($"{Path.GetDirectoryName(GetThisFilePath())}\\Inputs\\Day9Input.txt");
 
-Console.WriteLine("Day 9 part 1 solution: " + Day9Part1.Solve(day9Input));
+Console.WriteLine("Day 9 part 1 solution: too slow uncomment to run"); //+ Day9Part1.Solve(day9Input));
+
+Console.WriteLine("Day 9 part 2 solution: " + Day9Part2.Solve(day9Input));
 
 static string GetThisFilePath([CallerFilePath] string path = null)
 {

@@ -11,4 +11,8 @@
     <Folder Include="Inputs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="morelinq" Version="4.3.0" />
+  </ItemGroup>
+
 </Project>
