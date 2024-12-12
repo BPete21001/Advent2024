@@ -22,8 +22,6 @@ public class Day11Part2
         for (int i = 0; i < 75; i++)
         {
 
-            Console.WriteLine(i);
-
             Dictionary<long, long> newStonesMap = new Dictionary<long, long>();
 
             foreach (KeyValuePair<long, long> stone in stonesMap)
